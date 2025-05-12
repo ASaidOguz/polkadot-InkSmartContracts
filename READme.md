@@ -1,7 +1,10 @@
 ## POLKADOT INK SMARTCONTRACT EXAMPLES
 
- 1. Flipper Smart Contract:
+ - [1. Flipper Smart Contract](#1-flipper-smart-contract)
+ - [2. Escrow Contract](#2-escrow-contract)
 
+
+## 1. Flipper Smart Contract:
   The most basic smart contract written in İnk lang(Polkadot native smart contract language)
 
   - Download Polkadot smart contract cli -[Directives](https://github.com/use-ink/cargo-contract)
@@ -71,6 +74,11 @@ With [Ink-UI](https://ui.use.ink/) contract can be easly deployed and interact w
 For example you want to deploy into astar shibuya(astar testnet) you only need some SBY(test token)
 
 - Download polkadot js wallet , connect [Astar Shinuya](https://portal.astar.network/shibuya-testnet/assets) and click on drip icon to get your test tokens.
+
+
+
 ![Testnet Faucet](info-images/astar_testnet.PNG)
 
 Rest of the deployment and interactions are same as mentioned in documents.
+
+## 2. Escrow Contract:
