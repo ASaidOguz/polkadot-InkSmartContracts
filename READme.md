@@ -64,6 +64,10 @@ target
 
 Pretty easy to deploy and interact with local and almost same as deploying into live testnet 
 
+With [Ink-UI](https://ui.use.ink/) contract can be easly deployed and interact with.For live testnet just choose from drop of menu,
+
+![Astar-sby](info-images/astar_shibuya.PNG)
+
 For example you want to deploy into astar shibuya(astar testnet) you only need some SBY(test token)
 
 - Download polkadot js wallet , connect [Astar Shinuya](https://portal.astar.network/shibuya-testnet/assets) and click on drip icon to get your test tokens.
