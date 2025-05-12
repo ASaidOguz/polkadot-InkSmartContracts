@@ -55,7 +55,11 @@ target
     └─ flipper.json
 ```
 - Deploying the contract you have been build ;
+
+
 [Run Substrate Node](https://use.ink/docs/v5/getting-started/running-substrate)
+
+
 [Deployment](https://use.ink/docs/v5/getting-started/deploy-your-contract)
 
 Pretty easy to deploy and interact with local and almost same as deploying into live testnet 
