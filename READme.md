@@ -64,4 +64,5 @@ For example you want to deploy into astar shibuya(astar testnet) you only need s
 
 - Download polkadot js wallet , connect [Astar Shinuya](https://portal.astar.network/shibuya-testnet/assets) and click on drip icon to get your test tokens.
 ![Testnet Faucet](info-images/astar_testnet.PNG)
+
 Rest of the deployment and interactions are same as mentioned in documents.
