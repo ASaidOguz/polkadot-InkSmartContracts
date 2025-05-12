@@ -38,7 +38,7 @@ flipper
   └─ .gitignore
 ```
 
-- For testing purposes (code alrready contains test env.)
+- Quickly check that it compiles, and the trivial tests pass with:
 use 
 ```
 cargo test
