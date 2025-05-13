@@ -1,7 +1,7 @@
 ## POLKADOT INK SMARTCONTRACT EXAMPLES
 
  - [1. Flipper Smart Contract](#1-flipper-smart-contract)
- - [2. Escrow Contract](#2-escrow-contract)
+ - [2. Balance Mapping Smart Contract](#2-balance-mapping-smart-contract)
 
 
 ## 1. Flipper Smart Contract:
@@ -19,7 +19,7 @@
   ```
   chmod +x substrate-contracts-node
 
-  ```
+```
 And move the file into your PATH
 ```
 sudo mv substrate-contracts-node /usr/local/bin/
@@ -49,7 +49,7 @@ cargo test
 cargo contract build
 ```
 
-After compilation you will notice new folder called target which it contains;
+After compiling you will notice new folder called target which it contains;
 ```
 target
   └─ ink
@@ -58,10 +58,6 @@ target
     └─ flipper.json
 ```
 - Deploying the contract you have been build ;
-
-
-[Run Substrate Node](https://use.ink/docs/v5/getting-started/running-substrate)
-
 
 [Deployment](https://use.ink/docs/v5/getting-started/deploy-your-contract)
 
@@ -73,7 +69,7 @@ With [Ink-UI](https://ui.use.ink/) contract can be easly deployed and interact w
 
 For example you want to deploy into astar shibuya(astar testnet) you only need some SBY(test token)
 
-- Download polkadot js wallet , connect [Astar Shinuya](https://portal.astar.network/shibuya-testnet/assets) and click on drip icon to get your test tokens.
+- Download polkadot js wallet , connect [Astar Shibuya](https://portal.astar.network/shibuya-testnet/assets) and click on drip icon to get your test tokens.
 
 
 
@@ -81,4 +77,4 @@ For example you want to deploy into astar shibuya(astar testnet) you only need s
 
 Rest of the deployment and interactions are same as mentioned in documents.
 
-## 2. Escrow Contract:
+## 2. Balance Mapping Smart Contract:
