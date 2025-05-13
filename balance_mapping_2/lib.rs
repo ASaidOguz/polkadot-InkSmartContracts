@@ -1,7 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 
 #[ink::contract]
-mod balance_mapping_2 {
+pub mod balance_mapping_2 {
 
     use ink::storage::Mapping;
 
@@ -46,6 +46,28 @@ mod balance_mapping_2 {
                 .expect("Balance overflow");
             self.balances.insert(caller, &new_balance);
         }
+        /// Withdraw all your balance from the contract.
+        #[ink(message)]
+        pub fn withdraw(&mut self) {
+            let caller = self.env().caller();
+            let balance = self.balances.get(caller).unwrap();
+            self.balances.remove(caller);
+            self.env().transfer(caller, balance).unwrap()
+        }
+        /// Returns the `balance` of the contract.
+        #[ink(message)]
+        pub fn get_contract_balance(&self) -> Balance {
+            self.env().balance()
+        }
+    }
+}
+
+
+
+
+
+
+/* 
 
         /// Withdraw all your balance from the contract.
         /// Returns true on success, false on failure
@@ -88,10 +110,10 @@ mod balance_mapping_2 {
             // This's debug line for checking out the reason of failure.
             ink::env::debug_println!("Withdraw failed: no balance for caller {:?}", caller);
             false
+                }
+            }
         }
-    }
-}
 
       
     }
-}
+ */

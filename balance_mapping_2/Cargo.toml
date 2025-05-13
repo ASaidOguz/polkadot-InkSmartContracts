@@ -13,6 +13,10 @@ ink_e2e = { version = "5.1.1" }
 [lib]
 path = "lib.rs"
 
+[[test]]
+name = "tests"
+path = "tests/tests.rs"
+
 [features]
 default = ["std"]
 std = [
