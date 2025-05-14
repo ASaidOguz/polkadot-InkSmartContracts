@@ -186,3 +186,6 @@ mod MyContract {
 ```
 
 The values of an enum should be referenced as Status::OpeningPeriod.
+
+--> For Getter and setters in Ink! smart contracts genericaly can be differentiate from each other
+   with &self and &mut Self => Means setter mostly have mutable self element. 

@@ -5,24 +5,50 @@ pub mod balance_mapping_2 {
 
     use ink::storage::Mapping;
 
+    use ink::env::{
+        call::{build_call, ExecutionInput, Selector},
+        DefaultEnvironment,
+        };
+
     #[ink(storage)]
     pub struct BalanceMapping2 {
         /// Assign a balance to every account ID
         balances: Mapping<AccountId, Balance>,
+        // contract we gonna use for remote flip. 
+        flip_contract:AccountId,
     }
     // Compiler asked me to set this.So no warnings.
-    impl Default for BalanceMapping2 {
-         fn default() -> Self {
-             Self::new()
-         }
-    }
+ 
+
+  
 
     impl BalanceMapping2 {
        /// Constructor to initialize the contract with an empty mapping.
         #[ink(constructor, payable)]
-        pub fn new() -> Self {
+        pub fn new(contract_address:AccountId) -> Self {
             let balances = Mapping::default();
-            Self { balances }
+            let flip_contract= contract_address;
+            Self { balances,
+                   flip_contract }
+        }
+
+     
+
+        #[ink(message)]
+        pub fn remote_flip(&mut self) {
+            let _ = build_call::<DefaultEnvironment>()
+            .call(self.flip_contract)
+            .call_v1()
+            .gas_limit(0)
+            .transferred_value(0)
+            .exec_input(
+        ExecutionInput::new(Selector::new(ink::selector_bytes!("flip")))
+            .push_arg(42u8)
+            .push_arg(true)
+            .push_arg(&[0x10u8; 32])
+                         )
+        .returns::<()>() // Not <bool>
+        .invoke();
         }
 
         /// Retrieve the balance of the caller.-> In solidity view the slot value should return 0 if account doesnt exist
