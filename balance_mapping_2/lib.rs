@@ -17,25 +17,55 @@ pub mod balance_mapping_2 {
         // contract we gonna use for remote flip. 
         flip_contract:AccountId,
     }
-    // Compiler asked me to set this.So no warnings.
- 
 
-  
+    /// Defines an event that is emitted
+    /// every time value is transferred.
+    #[ink(event)]
+    pub struct Transferred {
+        from: Option<AccountId>,
+        to: Option<AccountId>,
+        value: Balance,
+    }
 
+    /// Defines an event that is emitted
+    /// every time remote function's invoked.
+    #[ink(event)]
+    pub struct RemoteInvoked {
+        from: Option<AccountId>,
+        to: Option<AccountId>,
+    }
+
+    /// Defines an event that is emitted
+    /// every time withdraw function's invoked.
+    #[ink(event)]
+    pub struct Withdrawed {
+        from: Option<AccountId>,
+        to: Option<AccountId>,
+        value:Balance,
+    }
+   
     impl BalanceMapping2 {
        /// Constructor to initialize the contract with an empty mapping.
         #[ink(constructor, payable)]
         pub fn new(contract_address:AccountId) -> Self {
             let balances = Mapping::default();
             let flip_contract= contract_address;
-            Self { balances,
-                   flip_contract }
+            Self { 
+                   balances,
+                   flip_contract 
+                }
         }
-
-     
 
         #[ink(message)]
         pub fn remote_flip(&mut self) {
+            // get caller account-id.
+            let caller =self.env().caller();
+
+            Self::env().emit_event(RemoteInvoked{
+                from:Some(caller),
+                to:Some(self.flip_contract),
+            });
+
             let _ = build_call::<DefaultEnvironment>()
             .call(self.flip_contract)
             .call_v1()
@@ -49,6 +79,7 @@ pub mod balance_mapping_2 {
                          )
         .returns::<()>() // Not <bool>
         .invoke();
+
         }
 
         /// Retrieve the balance of the caller.-> In solidity view the slot value should return 0 if account doesnt exist
@@ -66,6 +97,12 @@ pub mod balance_mapping_2 {
             let balance = self.balances.get(caller).unwrap_or(0);
             let endowment = self.env().transferred_value();
 
+            Self::env().emit_event(Transferred{
+                from:Some(caller),
+                to:Some(self.flip_contract),
+                value:endowment,
+            });
+
             // Safe add for overflow check.
             let new_balance = balance
                 .checked_add(endowment)
@@ -75,9 +112,19 @@ pub mod balance_mapping_2 {
         /// Withdraw all your balance from the contract.
         #[ink(message)]
         pub fn withdraw(&mut self) {
+            // Get caller account address.
             let caller = self.env().caller();
+            // Get balance value from map.
             let balance = self.balances.get(caller).unwrap();
+            // fire withdraw event.
+            Self::env().emit_event(Withdrawed{
+                from:Some(self.env().account_id()),
+                to:Some(caller),
+                value:balance,
+            });
+            // remove callers value from map. 
             self.balances.remove(caller);
+            // do the transfer.
             self.env().transfer(caller, balance).unwrap()
         }
         /// Returns the `balance` of the contract.
