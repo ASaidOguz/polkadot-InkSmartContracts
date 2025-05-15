@@ -189,3 +189,11 @@ The values of an enum should be referenced as Status::OpeningPeriod.
 
 --> For Getter and setters in Ink! smart contracts genericaly can be differentiate from each other
    with &self and &mut Self => Means setter mostly have mutable self element. 
+
+--> require() statemnts equvalent for ink!     
+        #[ink(constructor)]
+        pub fn new(init_value: bool) -> Self {
+            // equvalent of require() statemnt from solidity; 
+            assert!(init_value==true,"bool must start as true");
+            Self { value: init_value }
+        }
